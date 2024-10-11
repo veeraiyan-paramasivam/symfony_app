@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="mt-4">
+<h3 class="mt-4">{{ form.vars.data.id is null ? 'Create post' : 'Update Post' }}</h3>
+{{ form_start(form) }}
+<div class="form-group">
+{{ form_label(form.title) }}
+{{ form_widget(form.title,{'attr':{'class': 'form-control'}}) }}
+</div>
+<div class="form-group">
+{{ form_label(form.content) }}
+{{ form_widget(form.content,{'attr':{'class': 'form-control'}}) }}
+</div>
+<div class="image-container">  
+         {% if form.vars.data.imageName %}         
+            <img src="{{ asset('uploads/images/' ~ post.imageName) }}" alt="Post Image">
+        {% endif %}        
+</div>
+{{ form_row(form.imageFile) }}
+<button type="submit" class="btn btn-primary mt-2">
+{{ form.vars.data.id is null ? 'Save post' : 'Update Post' }}
+</button>
+
+{{ form_end(form) }}
+</div>
+
+<style>
+.image-container {
+    width: 200px; /* Fixed width of the container */
+    height: 200px; /* Fixed height of the container */
+    border: 1px solid #ccc; /* Optional border */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Hide overflow if image is larger */
+    background-color: #f8f8f8; /* Optional background color */
+    text-align: center; /* Center text if any */
+}
+
+.fixed-size-image {
+    max-width: 100%; /* Ensure the image fits within the container */
+    max-height: 100%; /* Ensure the image fits within the container */
+    object-fit: contain; /* Adjust to 'cover' if you want to fill the container */
+}
+</style>
+{% endblock %}
+
